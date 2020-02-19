@@ -1,0 +1,13 @@
+.input {
+    height: 2rem;
+    font-size: 1.8rem;
+    display: block;
+    margin-bottom: 1.2rem;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 2rem;
+    display: block;
+    text-align: left;
+}

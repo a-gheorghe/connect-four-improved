@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+}
+
+.customizeContainer {
+    margin-left: 3.6rem;
+}
+
+.table {
+    background-color: #0283F0;
+    border-collapse: collapse;
+    min-width: 40rem;
+}
+
+.caption {
+    font-size: 2.4rem;
+    font-weight: bolder;
+}
+
+.customize {
+    font-size: 2.4rem;
+    font-weight: bolder;
+    color: purple;
+}

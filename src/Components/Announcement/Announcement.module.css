@@ -1,0 +1,32 @@
+.resetButton {
+    color: white;
+    font-size: 2.4rem;
+    background-color: green;
+    height: 10rem;
+    width: 24rem;
+    border-radius: 2.4rem;
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.message {
+    font-size: 2.4rem;
+    color: black;
+}
+
+.pink {
+    color: #E70477;
+    text-align: center;
+    display: block;
+}
+
+.yellow{
+    color: #FFF809;
+    text-align: center;
+    display: block;
+}
+
+.textContainer {
+    background-color: darkblue;
+}
