@@ -4,6 +4,7 @@ This project is a nicer looking version of connect-four from https://github.com/
 
 The design was created by the wonderful Holly McLean https://www.hollywoulddesign.com/
 
+![image](https://user-images.githubusercontent.com/31079035/74906739-e10e8a80-537f-11ea-80b9-8c2e701f720d.png)
 Connect Four with React
 
 Connect Four is a game where each player tries to get 4 pieces of their own colour in a row either vertically, horizontally, or diagonally.
