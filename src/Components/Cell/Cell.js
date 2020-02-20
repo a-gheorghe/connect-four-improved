@@ -4,7 +4,7 @@ import styles from './Cell.module.css';
 
 const Cell = ({ rowIndex, colIndex, onClick, val }) => {
     const buttonStyle = classnames(styles.button, {
-        [styles.red]: val === '1',
+        [styles.pink]: val === '1',
         [styles.yellow]: val === '2'
     })
     return (
