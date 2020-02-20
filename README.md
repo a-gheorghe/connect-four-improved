@@ -58,4 +58,3 @@ This should reload automatically with any changes you make.
 Running `npm test` should run tests from all files of the form `*.test.js`
 
 Feel free to add any tooling you want, and make sure that your editor is set up for you to work efficiently.
-# connect-four
