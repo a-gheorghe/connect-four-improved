@@ -224,7 +224,7 @@ const Board = () => {
                         key={colIndex}
                         val={grid[rowIndex][colIndex]}
                         onClick={
-                        gameOver.gameOver ? () => {} : () => playTurn(colIndex)
+                          gameOver.gameOver ? () => {} : () => playTurn(colIndex)
                         }
                     />
                     ))}
@@ -234,8 +234,8 @@ const Board = () => {
         </table>
         <div className={styles.customizeContainer}>
           <h2 className={styles.customize}>Customize the board</h2>
-          <UserInput min="4" max="20" value={numRows} onChange={e => setNumRows(e.target.value)} label="Choose number of rows" />
-          <UserInput min="4" max="20" value={numColumns} onChange={e => setNumColumns(e.target.value)} label="Choose number of columns" />
+          <UserInput min="4" max="20" id="rowInput" value={numRows} onChange={e => setNumRows(e.target.value)} label="Choose number of rows" />
+          <UserInput min="4" max="20" id="colInput" value={numColumns} onChange={e => setNumColumns(e.target.value)} label="Choose number of columns" />
           {/* Wanted to be able to let the user dynamically choose how many items needed to be connected - not working completely so commenting out */}
           {/* <UserInput value={numConnect} onChange={e => setNumConnect(e.target.value)} label="Choose how many items to connect" /> */}
         </div>
