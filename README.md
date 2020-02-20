@@ -1,6 +1,9 @@
 # Ana's Connect Four Solution #
 
+This repo is a nicer looking version of connect-four: The design was created by the wonderful Holly McLean https://www.hollywoulddesign.com/
+
 Connect Four with React
+
 
 Connect Four is a game where each player tries to get 4 pieces of their own colour in a row either vertically, horizontally, or diagonally.
 
@@ -9,11 +12,13 @@ In this repo, most of the logic for the game can be found in src/Components/Boar
 To run the project:
 
 ```
-git clone https://github.com/a-gheorghe/connect-four.git
-cd connect-four
+git clone https://github.com/a-gheorghe/connect-four-improved.git
+cd connect-four-improved
 npm i
 npm start
+--> localhost:3000
 ```
+
 
 # Technical decisions #
 - Using React framework, upgraded to 16.8+ to use Hooks. We have started using Hooks recently at work and I wanted to take the opportunity to familiarize myself with them further.
