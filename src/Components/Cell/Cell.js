@@ -9,7 +9,11 @@ const Cell = ({ rowIndex, colIndex, onClick, val }) => {
     })
     return (
         <td className={styles.cell}>
-            <button className={buttonStyle} onClick={onClick} />
+            <button
+                className={buttonStyle}
+                onClick={onClick}
+                aria-label={`row ${rowIndex}, column ${colIndex}, occupied by player ${val}`}
+            />
         </td>
     );
 }

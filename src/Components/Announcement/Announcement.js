@@ -8,7 +8,7 @@ const Announcement = ({ gameOver, resetGame }) => {
         [styles.yellow]: gameOver.winner === '2'
     });
     return (
-        <div aria-live="assertive">
+        <div role="alert" aria-live="polite">
             {gameOver.gameOver &&
             <div className={styles.message}>
                 <div className={styles.textContainer}>

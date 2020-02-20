@@ -2,11 +2,11 @@ import React from 'react';
 import styles from './UserInput.module.css';
 
 
-const UserInput = ({ label, ...props }) => {
+const UserInput = ({ label, id, ...props }) => {
     return (
         <React.Fragment>
-            <label htmlFor="rowInput" className={styles.label}> {label} </label>
-            <input {...props} type="number" className={styles.input} />
+            <label htmlFor={`${id}-input`} className={styles.label}> {label} </label>
+            <input {...props} id={`${id}-input`} type="number" className={styles.input} />
         </React.Fragment>
     );
 };
