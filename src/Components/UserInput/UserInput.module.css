@@ -1,13 +1,40 @@
-.input {
-    height: 2rem;
-    font-size: 1.8rem;
-    display: block;
-    margin-bottom: 1.2rem;
+
+
+/* .input[type=number]::-webkit-inner-spin-button, 
+.input[type=number]::-webkit-outer-spin-button {  
+   -webkit-appearance: 1;;
+} */
+
+.inputContainer {
+    display: inline-block;
+    margin: 0 0 1rem;
+    position: relative;
 }
 
+.input {
+    border: .2rem solid #EFF7FF;
+    padding: 1.2rem;
+    width: 9rem;
+    display: flex;
+    text-align: center;
+    box-sizing: border-box;
+    background-color: transparent;
+    font-size: 18px;
+    line-height: 100%;
+    color: white;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
 .label {
-    font-weight: bold;
-    font-size: 2rem;
-    display: block;
-    text-align: left;
+    font-family: Gilroy-Bold;
+    font-size: 1.8rem;
+    line-height: 100%;
+    /* identical to box height, or 18px */
+    display: flex;
+    align-items: center;  
+    color: #EFF7FF;
+    margin-bottom: 1.6rem;
 }

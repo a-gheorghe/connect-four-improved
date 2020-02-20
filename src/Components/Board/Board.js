@@ -1,33 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Cell from "../Cell";
-import Announcement from "../Announcement";
-import TurnStatus from "../TurnStatus";
-import UserInput from "../UserInput";
 import styles from './Board.module.css';
 
-const Board = () => {
-  const [numRows, setNumRows] = useState(6);
-  const [numColumns, setNumColumns] = useState(7);
+const Board = props => {
+  const {
+    numRows, numColumns, turn, setTurn,
+    gameOver, setGameOver, grid, setGrid, createTable
+  } = props;
   const [numConnect, setNumConnect] = useState(4);
-  const [grid, setGrid] = useState([]);
-  const [turn, setTurn] = useState("1");
-  const [gameOver, setGameOver] = useState({
-    gameOver: false,
-    direction: null,
-    winner: null
-  });
-
-  const createTable = () => {
-    const table = [];
-    for (let i = 0; i < numRows; i++) {
-      const row = [];
-      for (let j = 0; j < numColumns; j++) {
-        row.push("0");
-      }
-      table.push(row);
-    }
-    setGrid(table);
-  };
 
   /* Update the grid on each chip drop. If no space, let user know */
   const dropChip = colIndex => {
@@ -60,7 +40,7 @@ const Board = () => {
             if (count === numConnect) {
               setGameOver({
                 gameOver: true,
-                direction: "vertically",
+                direction: "vertical",
                 winner: occupiedBy
               });
               return;
@@ -92,7 +72,7 @@ const Board = () => {
             if (count === numConnect) {
               setGameOver({
                 gameOver: true,
-                direction: "horizontally",
+                direction: "horizontal",
                 winner: occupiedBy
               });
               return;
@@ -130,7 +110,7 @@ const Board = () => {
             win &&
               setGameOver({
                 gameOver: true,
-                direction: "diagonally from top left to bottom right",
+                direction: "diagonal",
                 winner: turn
               });
             return;
@@ -161,7 +141,7 @@ const Board = () => {
             win &&
               setGameOver({
                 gameOver: true,
-                direction: "diagonally from top right to bottom left",
+                direction: "diagonal",
                 winner: turn
               });
             return;
@@ -189,12 +169,6 @@ const Board = () => {
     turn === "1" ? setTurn("2") : setTurn("1");
   };
 
-  const resetGame = () => {
-    setGameOver(false);
-    createTable();
-  };
-
-
   useEffect(() => {
     createTable();
   }, [numRows, numColumns, numConnect]);
@@ -210,39 +184,41 @@ const Board = () => {
   }, [grid]);
 
   return (
-    <React.Fragment>
-      <div className={styles.container}>
-        <table className={styles.table}>
-            <caption className={styles.caption}>Connect Four</caption>
-            <tbody>
-                {grid.map((row, rowIndex) => (
-                <tr className={styles.row} key={rowIndex}>
-                    {row.map((cell, colIndex) => (
-                    <Cell
-                        rowIndex={rowIndex}
-                        colIndex={colIndex}
-                        key={colIndex}
-                        val={grid[rowIndex][colIndex]}
-                        onClick={
-                          gameOver.gameOver ? () => {} : () => playTurn(colIndex)
-                        }
-                    />
-                    ))}
-                </tr>
-                ))}
-            </tbody>
-        </table>
-        <div className={styles.customizeContainer}>
-          <h2 className={styles.customize}>Customize the board</h2>
-          <UserInput min="4" max="20" id="rowInput" value={numRows} onChange={e => setNumRows(e.target.value)} label="Choose number of rows" />
-          <UserInput min="4" max="20" id="colInput" value={numColumns} onChange={e => setNumColumns(e.target.value)} label="Choose number of columns" />
-          {/* Wanted to be able to let the user dynamically choose how many items needed to be connected - not working completely so commenting out */}
-          {/* <UserInput value={numConnect} onChange={e => setNumConnect(e.target.value)} label="Choose how many items to connect" /> */}
-        </div>
-        </div>
-        <TurnStatus turn={turn} gameOver={gameOver} />
-        <Announcement gameOver={gameOver} resetGame={resetGame} />
-    </React.Fragment>
+    <div className={styles.container}>
+      <table className={styles.table}>
+          <tbody>
+              {grid.map((row, rowIndex) => (
+              <tr className={styles.row} key={rowIndex}>
+                  {row.map((cell, colIndex) => (
+                  <Cell
+                      rowIndex={rowIndex}
+                      colIndex={colIndex}
+                      key={colIndex}
+                      val={grid[rowIndex][colIndex]}
+                      onClick={
+                        gameOver.gameOver ? () => {} : () => playTurn(colIndex)
+                      }
+                  />
+                  ))}
+              </tr>
+              ))}
+          </tbody>
+      </table>
+      <svg className={styles.leftFoot} width="113" height="96" viewBox="0 0 113 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="path-1-inside-1" fill="white">
+        <path fillRule="evenodd" clipRule="evenodd" d="M73 7.87679C73 3.52656 69.4734 0 65.1232 0H47.3768C43.0266 0 39.5 3.52657 39.5 7.87682C38.8121 29.1493 32.5535 60.0816 12.0902 68.8213C5.79218 71.5111 0 76.7517 0 83.6C0 90.4483 5.55167 96 12.4 96H39.5H73H100.1C106.948 96 112.5 90.4483 112.5 83.6C112.5 76.7517 106.708 71.5111 100.41 68.8213C79.9465 60.0816 73.6879 29.1493 73 7.87679Z"/>
+        </mask>
+        <path fillRule="evenodd" clipRule="evenodd" d="M73 7.87679C73 3.52656 69.4734 0 65.1232 0H47.3768C43.0266 0 39.5 3.52657 39.5 7.87682C38.8121 29.1493 32.5535 60.0816 12.0902 68.8213C5.79218 71.5111 0 76.7517 0 83.6C0 90.4483 5.55167 96 12.4 96H39.5H73H100.1C106.948 96 112.5 90.4483 112.5 83.6C112.5 76.7517 106.708 71.5111 100.41 68.8213C79.9465 60.0816 73.6879 29.1493 73 7.87679Z" fill="#1659A9"/>
+        <path d="M100.41 68.8213L96.4822 78.0177L100.41 68.8213ZM65.1232 -10H47.3768V10H65.1232V-10ZM16.0178 78.0177C29.9387 72.0722 37.9838 59.0875 42.6003 46.4896C47.2898 33.6925 49.1291 19.5081 49.4948 8.20003L29.5052 7.5536C29.183 17.5181 27.549 29.4361 23.8214 39.6081C20.0209 49.9794 14.7049 56.8307 8.16248 59.6249L16.0178 78.0177ZM39.5 86H12.4V106H39.5V86ZM39.5 106H73V86H39.5V106ZM73 106H100.1V86H73V106ZM104.338 59.6249C97.7951 56.8307 92.4791 49.9794 88.6786 39.6081C84.951 29.436 83.317 17.518 82.9948 7.55357L63.0052 8.2C63.3709 19.5081 65.2102 33.6925 69.8997 46.4896C74.5162 59.0875 82.5612 72.0722 96.4822 78.0177L104.338 59.6249ZM122.5 83.6C122.5 70.686 111.953 62.8774 104.338 59.6249L96.4822 78.0177C98.5878 78.917 100.299 80.127 101.359 81.313C102.361 82.4355 102.5 83.1795 102.5 83.6H122.5ZM100.1 106C112.471 106 122.5 95.9712 122.5 83.6H102.5C102.5 84.9255 101.425 86 100.1 86V106ZM8.16248 59.6249C0.547025 62.8774 -10 70.686 -10 83.6H10C10 83.1795 10.1386 82.4355 11.1412 81.313C12.2007 80.127 13.9122 78.917 16.0178 78.0177L8.16248 59.6249ZM47.3768 -10C37.5037 -10 29.5 -1.99627 29.5 7.87682H49.5C49.5 9.04942 48.5494 10 47.3768 10V-10ZM-10 83.6C-10 95.9712 0.0288145 106 12.4 106V86C11.0745 86 10 84.9255 10 83.6H-10ZM83 7.87679C83 -1.99629 74.9963 -10 65.1232 -10V10C63.9506 10 63 9.0494 63 7.87679H83Z" fill="#0C458A" mask="url(#path-1-inside-1)"/>
+      </svg>
+      <svg className={styles.rightFoot} width="113" height="96" viewBox="0 0 113 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <mask id="path-1-inside-1" fill="white">
+        <path fillRule="evenodd" clipRule="evenodd" d="M73 7.87679C73 3.52656 69.4734 0 65.1232 0H47.3768C43.0266 0 39.5 3.52657 39.5 7.87682C38.8121 29.1493 32.5535 60.0816 12.0902 68.8213C5.79218 71.5111 0 76.7517 0 83.6C0 90.4483 5.55167 96 12.4 96H39.5H73H100.1C106.948 96 112.5 90.4483 112.5 83.6C112.5 76.7517 106.708 71.5111 100.41 68.8213C79.9465 60.0816 73.6879 29.1493 73 7.87679Z"/>
+        </mask>
+        <path fillRule="evenodd" clipRule="evenodd" d="M73 7.87679C73 3.52656 69.4734 0 65.1232 0H47.3768C43.0266 0 39.5 3.52657 39.5 7.87682C38.8121 29.1493 32.5535 60.0816 12.0902 68.8213C5.79218 71.5111 0 76.7517 0 83.6C0 90.4483 5.55167 96 12.4 96H39.5H73H100.1C106.948 96 112.5 90.4483 112.5 83.6C112.5 76.7517 106.708 71.5111 100.41 68.8213C79.9465 60.0816 73.6879 29.1493 73 7.87679Z" fill="#1659A9"/>
+        <path d="M100.41 68.8213L96.4822 78.0177L100.41 68.8213ZM65.1232 -10H47.3768V10H65.1232V-10ZM16.0178 78.0177C29.9387 72.0722 37.9838 59.0875 42.6003 46.4896C47.2898 33.6925 49.1291 19.5081 49.4948 8.20003L29.5052 7.5536C29.183 17.5181 27.549 29.4361 23.8214 39.6081C20.0209 49.9794 14.7049 56.8307 8.16248 59.6249L16.0178 78.0177ZM39.5 86H12.4V106H39.5V86ZM39.5 106H73V86H39.5V106ZM73 106H100.1V86H73V106ZM104.338 59.6249C97.7951 56.8307 92.4791 49.9794 88.6786 39.6081C84.951 29.436 83.317 17.518 82.9948 7.55357L63.0052 8.2C63.3709 19.5081 65.2102 33.6925 69.8997 46.4896C74.5162 59.0875 82.5612 72.0722 96.4822 78.0177L104.338 59.6249ZM122.5 83.6C122.5 70.686 111.953 62.8774 104.338 59.6249L96.4822 78.0177C98.5878 78.917 100.299 80.127 101.359 81.313C102.361 82.4355 102.5 83.1795 102.5 83.6H122.5ZM100.1 106C112.471 106 122.5 95.9712 122.5 83.6H102.5C102.5 84.9255 101.425 86 100.1 86V106ZM8.16248 59.6249C0.547025 62.8774 -10 70.686 -10 83.6H10C10 83.1795 10.1386 82.4355 11.1412 81.313C12.2007 80.127 13.9122 78.917 16.0178 78.0177L8.16248 59.6249ZM47.3768 -10C37.5037 -10 29.5 -1.99627 29.5 7.87682H49.5C49.5 9.04942 48.5494 10 47.3768 10V-10ZM-10 83.6C-10 95.9712 0.0288145 106 12.4 106V86C11.0745 86 10 84.9255 10 83.6H-10ZM83 7.87679C83 -1.99629 74.9963 -10 65.1232 -10V10C63.9506 10 63 9.0494 63 7.87679H83Z" fill="#0C458A" mask="url(#path-1-inside-1)"/>
+      </svg>
+    </div>    
   );
 };
 
