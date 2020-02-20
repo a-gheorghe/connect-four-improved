@@ -23,7 +23,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@testing-library/react": "^9.4.0",
-    "jest": "^25.1.0"
+    "@testing-library/react": "^9.4.0"
   }
 }

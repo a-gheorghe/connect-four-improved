@@ -1,0 +1,21 @@
+.app {
+  display: flex;
+}
+
+.gameContainer {
+  justify-content: center;
+  flex-direction: column;
+  background-color: #252B31;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex: 3;
+}
+
+.sidebarContainer {
+  background-color: #202529;
+  flex: 1;
+  height: 100vh;
+}
+
+

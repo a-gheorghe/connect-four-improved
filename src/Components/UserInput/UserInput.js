@@ -6,7 +6,9 @@ const UserInput = ({ label, id, ...props }) => {
     return (
         <React.Fragment>
             <label htmlFor={`${id}-input`} className={styles.label}> {label} </label>
-            <input {...props} id={`${id}-input`} type="number" className={styles.input} />
+            <div className={styles.inputContainer}>
+                <input {...props} id={`${id}-input`} type="number" className={styles.input} />
+            </div>
         </React.Fragment>
     );
 };

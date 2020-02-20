@@ -1,4 +1,69 @@
-.turn {
-    font-size: 2.4rem;
-    color: black;
+.statusContainer {
+    margin-top: 6rem;
+    width: 80%;
+    background: #32383E;
+    box-shadow: 6px 6px 28px rgba(0, 0, 0, 0.3), -5px -6px 16px rgba(195, 200, 205, 0.04);
+    border-radius: 16px;
+    padding: 3rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.turn, .win {
+    display: flex;
+    font-family: Gilroy-Bold;
+    font-size: 1.8rem;
+    line-height: 100%;
+    justify-content: center;
+    /* identical to box height, or 18px */  
+    align-items: center;   
+    color: #EFF7FF;
+    text-transform: uppercase;
+    margin-bottom: 4.2rem;
+}
+
+.chip {
+    height: 12rem;
+    width: 12rem;
+    box-shadow: inset 0px 0px 3rem rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    align-self: center;
+    margin-bottom: 4.2rem;
+}
+
+.yellow {
+    border: 1rem solid #FFF809;
+    background-color: #FFF809;
+}
+
+.pink {
+    border: 1rem solid #E70477;
+    background-color: #E70477;
+}
+
+.pinkShadow {
+    box-shadow: 0 0 0 6px #E70477;
+}
+
+.yellowShadow {
+    box-shadow: 0 0 0 6px #FFF809;
+}
+
+.resetButton {
+    height: 6rem;
+    background-color: green;
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 18px;
+    line-height: 100%;
+    /* identical to box height, or 18px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    border: none;
 }
