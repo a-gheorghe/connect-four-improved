@@ -1,9 +1,10 @@
 # Ana's Connect Four Solution #
 
-This repo is a nicer looking version of connect-four: The design was created by the wonderful Holly McLean https://www.hollywoulddesign.com/
+This project is a nicer looking version of connect-four from https://github.com/a-gheorghe/connect-four. 
+
+The design was created by the wonderful Holly McLean https://www.hollywoulddesign.com/
 
 Connect Four with React
-
 
 Connect Four is a game where each player tries to get 4 pieces of their own colour in a row either vertically, horizontally, or diagonally.
 
