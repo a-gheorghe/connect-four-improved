@@ -11,14 +11,19 @@
     background-color: white;
     outline: none;
     border: 1rem solid #0C458A;
+    cursor: pointer;
 }
 
-.button:hover {
-    background-color: light;;
+.hoveredPink {
+    background-color: #FBE4FF;
 }
 
-.button:focus {
-    box-shadow: 0 0 0 5px #333;
+.hoveredYellow {
+    background-color: #FFFFD1;
+}
+
+.hoveredGreen {
+    background-color: #DBFFD6;
 }
 
 .pink {
@@ -27,4 +32,8 @@
 
 .yellow {
     background-color: #FFF809;
+}
+
+.green {
+    background-color: green;
 }

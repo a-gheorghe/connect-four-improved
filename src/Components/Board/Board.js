@@ -5,9 +5,11 @@ import styles from './Board.module.css';
 const Board = props => {
   const {
     numRows, numColumns, turn, setTurn,
-    gameOver, setGameOver, grid, setGrid, createTable
+    gameOver, setGameOver, grid, setGrid,
+    createTable, setLastItem
   } = props;
   const [numConnect, setNumConnect] = useState(4);
+  const [colHovered, setColHovered] = useState(null);
 
   /* Update the grid on each chip drop. If no space, let user know */
   const dropChip = colIndex => {
@@ -15,12 +17,21 @@ const Board = props => {
       if (grid[row][colIndex] === "0") {
         const newGrid = [...grid];
         newGrid[row][colIndex] = turn;
+        setLastItem({
+          row: row,
+          col: colIndex
+        })
         setGrid(newGrid);
         return;
       }
     }
     alert("no more space in this column");
   };
+
+  const onHover = colIndex => {
+    console.log('hello');
+    setColHovered(colIndex);
+  }
 
   /* The following 4 functions are to determine whether there are 4
   chips of the same type in a row in a given direction: vertical, horizontal,
@@ -166,7 +177,14 @@ const Board = props => {
   };
 
   const changeTurn = () => {
-    turn === "1" ? setTurn("2") : setTurn("1");
+    // if parseInt(turn) === totalPlayers {
+     // newTurn = '1'
+    //}
+    // newTurn = parseInt(turn) + 1
+    // setTurn(newTurn)
+    turn === "1" ? setTurn("2") :
+    turn === "2" ? setTurn("3") :
+    setTurn("1");
   };
 
   useEffect(() => {
@@ -191,13 +209,16 @@ const Board = props => {
               <tr className={styles.row} key={rowIndex}>
                   {row.map((cell, colIndex) => (
                   <Cell
+                      isHovered={colHovered === colIndex}
                       rowIndex={rowIndex}
                       colIndex={colIndex}
                       key={colIndex}
                       val={grid[rowIndex][colIndex]}
+                      turn={turn}
                       onClick={
                         gameOver.gameOver ? () => {} : () => playTurn(colIndex)
                       }
+                      onHover={onHover}
                   />
                   ))}
               </tr>

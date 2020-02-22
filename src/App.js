@@ -13,6 +13,12 @@ const App = () => {
     direction: null,
     winner: null
   });
+
+  const [lastItem, setLastItem] = useState({
+    row:  null,
+    col: null,
+  })
+
     
     const createTable = () => {
       const table = [];
@@ -32,6 +38,12 @@ const App = () => {
       createTable();
     };
 
+    const undo = () => {
+      const newGrid = [...grid];
+      newGrid[lastItem.row][lastItem.col] = '0'
+      setGrid(newGrid)
+    }
+
     return (
       <div className={styles.app}>
         <div className={styles.gameContainer}>
@@ -45,6 +57,7 @@ const App = () => {
             grid={grid}
             setGrid={setGrid}
             createTable={createTable}
+            setLastItem={setLastItem}
           />
         </div>
         <div className={styles.sidebarContainer}>
@@ -57,6 +70,7 @@ const App = () => {
             setNumColumns={setNumColumns}
             turn={turn}
             gameOver={gameOver}
+            undo={undo}
           />
         </div>
       </div>
