@@ -41,12 +41,21 @@
     background-color: #E70477;
 }
 
+.green {
+    border: 1rem solid green;
+    background-color: green;
+}
+
 .pinkShadow {
     box-shadow: 0 0 0 6px #E70477;
 }
 
 .yellowShadow {
     box-shadow: 0 0 0 6px #FFF809;
+}
+
+.greenShadow {
+    box-shadow: 0 0 0 6px green;
 }
 
 .resetButton {

@@ -35,3 +35,7 @@
     left: 100%;
     transform: translate(-65%, -30%);
 }
+
+.hovered {
+    background-color: pink;
+}
