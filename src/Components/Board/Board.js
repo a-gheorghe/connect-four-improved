@@ -11,11 +11,11 @@ const Board = props => {
   const [numConnect, setNumConnect] = useState(4);
   const [colHovered, setColHovered] = useState(null);
 
-  /* Update the grid on each chip drop. If no space, let user know */
-  const dropChip = colIndex => {
+  const addChip = (colIndex) => {
+    const newGrid = [...grid];
+
     for (let row = numRows - 1; row >= 0; row--) {
       if (grid[row][colIndex] === "0") {
-        const newGrid = [...grid];
         newGrid[row][colIndex] = turn;
         setLastItem({
           row: row,
@@ -25,11 +25,42 @@ const Board = props => {
         return;
       }
     }
-    alert("no more space in this column");
+  }
+
+  const removeChip = (colIndex, rowIndex) => {
+    const newGrid = [...grid];
+    let currentRow = rowIndex
+    let prevRow = rowIndex - 1;
+    while (
+        currentRow < numRows &&
+        prevRow >= -1 &&
+        colIndex < numColumns &&
+        colIndex >= 0 &&
+        newGrid[currentRow][colIndex] !== "0"
+      ) {
+      if (currentRow === 0 || prevRow === -1 || newGrid[prevRow][colIndex] === "0") {
+        newGrid[currentRow][colIndex] = "0"
+      } else {
+        newGrid[currentRow][colIndex] = newGrid[prevRow][colIndex];
+        currentRow--
+        prevRow--
+    }
+  }
+  setGrid(newGrid);
+}
+
+  /* Update the grid on each chip drop:
+    If clicking on a cell where a chip exists, remove it
+    Otherwise, drop chip to bottom of column */
+  const dropChip = (colIndex, rowIndex) => {
+    if (grid[rowIndex][colIndex] !== "0") {
+      return removeChip(colIndex, rowIndex);
+    } else {
+      return addChip(colIndex);
+    }
   };
 
   const onHover = colIndex => {
-    console.log('hello');
     setColHovered(colIndex);
   }
 
@@ -162,6 +193,17 @@ const Board = props => {
     }
   };
 
+  const checkDraw = () => {
+    for (let row = 0; row < numRows; row++) {
+      for (let col = 0; col < numColumns; col++) {
+        if (grid[row][col] === "0") {
+          return false
+        }
+      }
+    }
+    return true;
+  }
+
   /* Check result is called in the useEffect each time the grid changes */
   const checkResult = () => {
     if (grid.length) {
@@ -169,11 +211,14 @@ const Board = props => {
       horizontalWin();
       diagonalUpWin();
       diagonalDownWin();
+
+      // function that checks if its a draw
+      checkDraw() && alert(`It's a draw!`) 
     }
   }
 
-  const playTurn = colIndex => {
-    dropChip(colIndex);
+  const playTurn = (colIndex, rowIndex) => {
+    dropChip(colIndex, rowIndex);
   };
 
   const changeTurn = () => {
@@ -216,7 +261,7 @@ const Board = props => {
                       val={grid[rowIndex][colIndex]}
                       turn={turn}
                       onClick={
-                        gameOver.gameOver ? () => {} : () => playTurn(colIndex)
+                        gameOver.gameOver ? () => {} : () => playTurn(colIndex, rowIndex)
                       }
                       onHover={onHover}
                   />
